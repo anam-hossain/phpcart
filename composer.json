@@ -1,0 +1,21 @@
+{
+    "name": "anam/phpcart",
+    "description": "Simple framework agnostic PHP shopping cart",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anam hossain",
+            "email": "anam@hotmail.com.au"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/http-foundation": "2.6.3",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Anam\\" : "src/" 
+        }
+    }
+}
