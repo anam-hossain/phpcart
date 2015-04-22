@@ -5,7 +5,7 @@ use Exception;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class Cart
+class Cart implements CartInterface
 {
     /**
      * The Cart session,
@@ -85,7 +85,7 @@ class Cart
         // If item already added, increment the quantity
         if ($this->has($product['id'])) {
             $item = $this->get($product['id']);
-            
+
             return $this->updateQty($item->id, $item->quantity + $product['quantity']);
         }
 
