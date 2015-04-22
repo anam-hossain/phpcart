@@ -1,6 +1,14 @@
 {
     "name": "anam/phpcart",
     "description": "Simple framework agnostic PHP shopping cart",
+    "keywords": [
+        "Cart",
+        "php cart",
+        "Shopping cart",
+        "Laravel shopping cart",
+        "Laravel cart"
+    ],
+    "homepage": "https://github.com/anam-hossain/phpcart",
     "license": "MIT",
     "authors": [
         {
@@ -10,12 +18,20 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "symfony/http-foundation": "2.6.3",
-        "illuminate/support": "4.2.*"
+        "symfony/http-foundation": "~2.0",
+        "illuminate/support": "~5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.4"
     },
     "autoload": {
         "psr-4": {
-            "Anam\\" : "src/" 
+            "Anam\\Phpcart\\" : "src/" 
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Anam\\Phpcart\\Test\\": "tests"
         }
     }
 }

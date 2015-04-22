@@ -1,12 +1,12 @@
 <?php
 require 'vendor/autoload.php';
 
-use Anam\PhpCart\Cart;
+use Anam\Phpcart\Cart;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Support\Helpers;
 
-$cart = new Cart(new Session);
+$cart = new Cart('anam');
 
-echo $cart->store();
+$cart->add(['id' => 1, 'name' => 'Hello']);
 
-dd($cart->get()['test']);
+var_dump($cart->getItems());
