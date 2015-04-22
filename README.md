@@ -43,7 +43,7 @@ You can now use this facade in place of instantiating the Cart yourself in the f
 
 ### Add Item
 
-The add method required `id`, `name`, `price` and `quantity` keys. However, you can pass any data that you application required.
+The add method required `id`, `name`, `price` and `quantity` keys. However, you can pass any data that your application required.
 
 ```php
 use Anam\Phpcart\Cart;
@@ -107,7 +107,7 @@ $cart->get(1001);
 $cart->has(1001);
 ```
 
-### Get the total number of Unique items in the cart
+### Get the total number of items in the cart
 
 ```php
 $cart->count();
