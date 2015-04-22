@@ -108,7 +108,17 @@ class Cart implements CartInterface
     {
         $this->collection->setItems($this->session->get($this->getCart(), []));
 
-        $items = $this->collection->insert($product);
+        if (! isset($product['id'])) {
+            throw new Exception('id is required');
+        }
+
+        if (! $this->has($product['id'])) {
+            throw new Exception('There is no item in shopping cart with id: ' . $product['id']);
+        }
+
+        $item = array_merge((array) $this->get($product['id']), $product);
+
+        $items = $this->collection->insert($item);
 
         $this->session->set($this->getCart(), $items);
 
