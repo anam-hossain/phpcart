@@ -80,6 +80,15 @@ class Cart
      */
     public function add(Array $product)
     {
+        $this->collection->validateItem($product);
+
+        // If item already added, increment the quantity
+        if ($this->has($product['id'])) {
+            $item = $this->get($product['id']);
+            
+            return $this->updateQty($item->id, $item->quantity + $product['quantity']);
+        }
+
         $this->collection->setItems($this->session->get($this->getCart(), []));
 
         $items = $this->collection->insert($product);
@@ -97,7 +106,13 @@ class Cart
      */
     public function update(Array $product)
     {
-        return $this->add($product);
+        $this->collection->setItems($this->session->get($this->getCart(), []));
+
+        $items = $this->collection->insert($product);
+
+        $this->session->set($this->getCart(), $items);
+
+        return $this->collection->make($items);
     }
 
     /**
