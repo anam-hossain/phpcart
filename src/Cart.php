@@ -275,7 +275,7 @@ class Cart implements CartInterface
      * @return void
      */
 
-    public function clone($cart)
+    public function copy($cart)
     {
         if (is_object($cart)) {
             if (! $cart instanceof \Anam\Phpcart\Cart) {
