@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class Cart implements CartInterface
 {
+    const CARTSUFFIX = '_cart';
+
     /**
      * The Cart session,
      *
@@ -51,7 +53,7 @@ class Cart implements CartInterface
             throw new InvalidArgumentException('Cart name can not be empty.');
         }
 
-        $this->name = $name . '_cart';
+        $this->name = $name . self::CARTSUFFIX;
     }
 
     public function getCart()
@@ -99,7 +101,7 @@ class Cart implements CartInterface
     }
 
     /**
-     * Alias of add().
+     * Update an item.
      *
      * @param  Array  $product
      * @return \Anam\Phpcart\Collection
@@ -263,6 +265,34 @@ class Cart implements CartInterface
         return $items->sum(function($item) {
             return $item->quantity;
         });
+    }
+
+    /**
+     * Clone a cart to another
+     * 
+     * @param  mix $cart
+     * 
+     * @return void
+     */
+
+    public function clone($cart)
+    {
+        if (is_object($cart)) {
+            if (! $cart instanceof \Anam\Phpcart\Cart) {
+                throw new InvalidArgumentException("Argument must be an instance of " . get_class($this));
+            }
+
+            $items = $this->session->get($cart->getCart(), []);
+        } else {
+            if (! $this->session->has($cart . self::CARTSUFFIX) {
+                throw new Exception('Cart does not exist: ' . $cart);
+            }
+
+            $items = $this->session->get($cart . self::CARTSUFFIX, []);
+        }
+
+        $this->session->set($this->getCart(), $items);
+
     }
 
     /**

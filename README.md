@@ -1,4 +1,5 @@
 # PHPCart
+Simple framework agnostic shopping cart.
 
 ## Features
 
