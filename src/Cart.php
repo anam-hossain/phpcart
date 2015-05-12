@@ -40,8 +40,6 @@ class Cart implements CartInterface
         $this->session = new Session();
         $this->collection = new Collection();
 
-        $this->session->start();
-
         if ($name) {
             $this->setCart($name);
         }
@@ -284,7 +282,7 @@ class Cart implements CartInterface
 
             $items = $this->session->get($cart->getCart(), []);
         } else {
-            if (! $this->session->has($cart . self::CARTSUFFIX) {
+            if (! $this->session->has($cart . self::CARTSUFFIX)) {
                 throw new Exception('Cart does not exist: ' . $cart);
             }
 
