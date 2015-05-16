@@ -294,12 +294,23 @@ class Cart implements CartInterface
     }
 
     /**
-     * Flash cart data.
+     * Alias of clear (Deprecated)
      *
      * @return void
      */
 
     public function flash()
+    {
+        $this->clear();
+    }
+
+    /**
+     * Empty cart
+     *
+     * @return void
+     */
+
+    public function clear()
     {
         $this->session->remove($this->getCart());
     }
