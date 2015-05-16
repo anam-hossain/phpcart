@@ -129,7 +129,7 @@ $cart->getTotal();
 ### Empty the cart
 
 ```php
-$cart->flash();
+$cart->clear();
 ```
 
 ### Multiple carts
