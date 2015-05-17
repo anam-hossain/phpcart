@@ -63,7 +63,7 @@ class Cart implements CartInterface
      * Set the current cart name
      *
      * @param  string  $instance  Cart instance name
-     * @return StudentVIP\Cart
+     * @return \Anam\Phpcart\Cart
      */
     public function named($name)
     {
@@ -163,8 +163,8 @@ class Cart implements CartInterface
     /**
      * Remove an item from the cart.
      *
-     * @param  int $id
-     * @return $this
+     * @param  mixed $id
+     * @return \Anam\Phpcart\Collection
      */
     public function remove($id)
     {
