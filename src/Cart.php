@@ -35,10 +35,10 @@ class Cart implements CartInterface
      *
      * @return void
      */
-    public function __construct($name = null)
+    public function __construct($name = null, Session $session, Collection $collection)
     {
-        $this->session = new Session();
-        $this->collection = new Collection();
+        $this->session = $session;
+        $this->collection = $collection;
 
         if ($name) {
             $this->setCart($name);
