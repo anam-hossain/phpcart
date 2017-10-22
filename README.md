@@ -20,7 +20,12 @@ $ composer require anam/phpcart
 
 ## Integrations
 
-Laravel 4 and Laravel 5 integrations
+#### Laravel 5.5+ integrations
+
+##### Package Discovery
+`Anam\Phpcart` utilize the Laravel's package auto discovery feature. So, you don't need to add manually Service provider and Facade in Laravel application's config/app.php. Laravel will automatically register the service provider and facades for you.
+
+#### Laravel < 5.5 integrations
 
 Although PHPCart is framework agnostic, it does support Laravel out of the box and comes with a Service provider and Facade for easy integration.
 
