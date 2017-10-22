@@ -6,6 +6,7 @@ use Exception;
 use InvalidArgumentException;
 use Anam\Phpcart\Cart;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class CartTest extends TestCase
 {
@@ -47,5 +48,21 @@ class CartTest extends TestCase
         $cart = new Cart('test');
 
         $cart->add(['id' => '123']);
+    }
+
+    public function testAddCartItem()
+    {
+        $cart = new Cart('test', new MockArraySessionStorage());
+
+        $item = [
+            'id' => 123,
+            'name' => 'T-shirt',
+            'price' => 50,
+            'quantity' => 2
+        ];
+
+        $cartItems = $cart->add($item);
+
+        $this->assertEquals($item, (array) $cartItems->first());        
     }
 }
