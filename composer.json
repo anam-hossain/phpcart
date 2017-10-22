@@ -33,5 +33,15 @@
         "psr-4": {
             "Anam\\Phpcart\\Tests\\": "tests"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Anam\\Phpcart\\CartServiceProvider"
+            ],
+            "aliases": {
+                "Cart": "Anam\\Phpcart\\Facades\\Cart"
+            }
+        }
     }
 }
