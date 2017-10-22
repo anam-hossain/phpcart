@@ -24,9 +24,13 @@ class CartTest extends TestCase
         $cart = new Cart('test');
 
         $this->assertEquals('test_cart', $cart->getCart());
+
+        $cart = $cart->named('test2');
+
+         $this->assertEquals('test2_cart', $cart->getCart(), 'Set cart name using named() method');        
     }
 
-    public function testCartNameNotExist()
+    public function testInvalidCartName()
     {
         $cart = new Cart();
 
