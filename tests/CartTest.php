@@ -25,4 +25,13 @@ class CartTest extends TestCase
 
         $this->assertEquals('test_cart', $cart->getCart());
     }
+
+    public function testCartNameNotExist()
+    {
+        $cart = new Cart();
+
+        $cart->setCart('test');
+
+        $this->assertNotEquals('Cart123', $cart->getCart());
+    }
 }
