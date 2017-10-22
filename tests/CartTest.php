@@ -38,4 +38,14 @@ class CartTest extends TestCase
 
         $this->assertNotEquals('Cart123', $cart->getCart());
     }
+
+    /**
+     * @expectedException Exception
+     */
+    public function testExceptionOnInvalidCartItem()
+    {
+        $cart = new Cart('test');
+
+        $cart->add(['id' => '123']);
+    }
 }
