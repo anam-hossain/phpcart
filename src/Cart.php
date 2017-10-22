@@ -4,6 +4,7 @@ namespace Anam\Phpcart;
 use Exception;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
 
 class Cart implements CartInterface
 {
@@ -33,11 +34,14 @@ class Cart implements CartInterface
     /**
      * Construct the class.
      *
+     * @param  string  $name
+     * @param  \Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface  $storage
      * @return void
      */
-    public function __construct($name = null)
+    public function __construct($name = null, SessionStorageInterface  $storage = null)
     {
-        $this->session = new Session();
+        $this->session = new Session($storage);
+
         $this->collection = new Collection();
 
         if ($name) {
