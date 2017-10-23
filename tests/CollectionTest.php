@@ -107,4 +107,18 @@ class CollectionTest extends TestCase
 
         $this->assertNull($collection->findItem(404));        
     }
+
+    public function testInsertAnItemInCollection()
+    {
+        $collection = new Collection();
+
+        $collection->insert([
+            'id' => 125,
+            'name' => 'shirt',
+            'price' => 500,
+            'quantity' => 1
+        ]);
+
+        $this->assertEquals(125, $collection->findItem(125)->id);        
+    }
 }
