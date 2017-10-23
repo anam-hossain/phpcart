@@ -73,4 +73,38 @@ class CollectionTest extends TestCase
 
         $this->assertTrue($collection->has($this->item));        
     }
+
+    public function testFindAnItemInCollection()
+    {
+        $collection = new Collection();
+
+        $collection->setItems([
+            125 => [
+                'id' => 125,
+                'name' => 'shirt',
+                'price' => 500,
+                'quantity' => 1
+            ], 
+            123 => $this->item
+        ]);
+
+        $this->assertEquals($this->item, $collection->findItem($this->item['id']));        
+    }
+
+    public function testItemNotExistInCollection()
+    {
+        $collection = new Collection();
+
+        $collection->setItems([
+            125 => [
+                'id' => 125,
+                'name' => 'shirt',
+                'price' => 500,
+                'quantity' => 1
+            ], 
+            123 => $this->item
+        ]);
+
+        $this->assertNull($collection->findItem(404));        
+    }
 }
