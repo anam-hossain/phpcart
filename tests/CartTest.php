@@ -121,4 +121,22 @@ class CartTest extends TestCase
 
         $this->assertEquals(array_merge($item, ['price' => 1000]), (array) $cartItems->first());
     }
+
+    public function testRemoveItemFromCart()
+    {
+        $cart = new Cart('test', new MockArraySessionStorage());
+
+        $item = [
+            'id' => 123,
+            'name' => 'T-shirt',
+            'price' => 50,
+            'quantity' => 2
+        ];
+
+        $cartItems = $cart->add($item);
+
+        $cartItems = $cart->remove(123);
+
+        $this->assertEquals(0, $cartItems->count());
+    }
 }
