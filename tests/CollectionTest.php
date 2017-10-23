@@ -121,4 +121,17 @@ class CollectionTest extends TestCase
 
         $this->assertEquals(125, $collection->findItem(125)->id);        
     }
+
+    /**
+     * @expectedException Exception
+     */
+    public function testValidateAnItem()
+    {
+        $collection = new Collection();
+
+        $collection->validateItem([
+            'id' => 125,
+            'quantity' => 1
+        ]);    
+    }
 }
