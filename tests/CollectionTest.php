@@ -26,7 +26,7 @@ class CollectionTest extends TestCase
     public function testSetItems()
     {
         $collection = new Collection();
-        
+
         $collection->setItems([
             [
                 'id' => 125,
@@ -38,5 +38,22 @@ class CollectionTest extends TestCase
         ]);
 
         $this->assertEquals($this->item, $collection->getItems()[1]);        
+    }
+
+    public function testFindItem()
+    {
+        $collection = new Collection();
+
+        $collection->setItems([
+            [
+                'id' => 125,
+                'name' => 'shirt',
+                'price' => 500,
+                'quantity' => 1
+            ], 
+            $this->item
+        ]);
+
+        $this->assertEquals($this->item, $collection->findItem(1));        
     }
 }
