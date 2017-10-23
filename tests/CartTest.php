@@ -65,4 +65,24 @@ class CartTest extends TestCase
 
         $this->assertEquals($item, (array) $cartItems->first());        
     }
+
+    public function testUpdateCartItem()
+    {
+        $cart = new Cart('test', new MockArraySessionStorage());
+
+        $item = [
+            'id' => 123,
+            'name' => 'T-shirt',
+            'price' => 50,
+            'quantity' => 2
+        ];
+
+        $cartItems = $cart->add($item);
+
+        $cartItems = $cart->update(['id' => 123, 'name' => 'Shirt']);
+
+        $this->assertNotEquals($item, (array) $cartItems->first());
+
+        $this->assertEquals(array_merge($item, ['name' => 'Shirt']), (array) $cartItems->first());        
+    }
 }
