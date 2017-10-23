@@ -271,4 +271,22 @@ class CartTest extends TestCase
 
         $this->assertEquals(50100, $cart->getTotal());
     }
+
+    public function testClearCart()
+    {
+        $cart = new Cart('test', new MockArraySessionStorage());
+
+        $item = [
+            'id' => 123,
+            'name' => 'T-shirt',
+            'price' => 50,
+            'quantity' => 2
+        ];
+
+        $cart->add($item);
+
+        $cart->clear();
+
+        $this->assertEquals(0, $cart->items()->count());
+    }
 }
