@@ -186,4 +186,20 @@ class CartTest extends TestCase
 
         $this->assertEquals($item, (array) $cart->get(123));
     }
+
+    public function testCartHasItem()
+    {
+        $cart = new Cart('test', new MockArraySessionStorage());
+
+        $item = [
+            'id' => 123,
+            'name' => 'T-shirt',
+            'price' => 50,
+            'quantity' => 2
+        ];
+
+        $cart->add($item);
+
+        $this->assertTrue($cart->has(123));
+    }
 }
