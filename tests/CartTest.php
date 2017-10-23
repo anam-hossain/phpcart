@@ -85,4 +85,40 @@ class CartTest extends TestCase
 
         $this->assertEquals(array_merge($item, ['name' => 'Shirt']), (array) $cartItems->first());        
     }
+
+    public function testUpdateQuantity()
+    {
+        $cart = new Cart('test', new MockArraySessionStorage());
+
+        $item = [
+            'id' => 123,
+            'name' => 'T-shirt',
+            'price' => 50,
+            'quantity' => 2
+        ];
+
+        $cartItems = $cart->add($item);
+
+        $cartItems = $cart->updateQty(123, 10);
+
+        $this->assertEquals(array_merge($item, ['quantity' => 10]), (array) $cartItems->first());
+    }
+
+    public function testUpdatePrice()
+    {
+        $cart = new Cart('test', new MockArraySessionStorage());
+
+        $item = [
+            'id' => 123,
+            'name' => 'T-shirt',
+            'price' => 50,
+            'quantity' => 2
+        ];
+
+        $cartItems = $cart->add($item);
+
+        $cartItems = $cart->updatePrice(123, 1000);
+
+        $this->assertEquals(array_merge($item, ['price' => 1000]), (array) $cartItems->first());
+    }
 }
