@@ -4,6 +4,7 @@ namespace Anam\Phpcart;
 use Exception;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
 
 class Cart implements CartInterface
@@ -36,10 +37,17 @@ class Cart implements CartInterface
      *
      * @param  string  $name
      * @param  \Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface  $storage
+     * @param  array $options
      * @return void
      */
-    public function __construct($name = null, SessionStorageInterface  $storage = null)
+    public function __construct($name = null, SessionStorageInterface $storage = null, array $options = [])
     {
+        if (!$storage) {
+            $options = array_merge(['gc_maxlifetime' => 604800], $options);
+
+            $storage = new NativeSessionStorage($options);
+        }
+
         $this->session = new Session($storage);
 
         $this->collection = new Collection();
@@ -82,7 +90,7 @@ class Cart implements CartInterface
      * @param  Array  $product
      * @return \Anam\Phpcart\Collection
      */
-    public function add(Array $product)
+    public function add(array $product)
     {
         $this->collection->validateItem($product);
 
@@ -108,15 +116,15 @@ class Cart implements CartInterface
      * @param  Array  $product
      * @return \Anam\Phpcart\Collection
      */
-    public function update(Array $product)
+    public function update(array $product)
     {
         $this->collection->setItems($this->session->get($this->getCart(), []));
 
-        if (! isset($product['id'])) {
+        if (!isset($product['id'])) {
             throw new Exception('id is required');
         }
 
-        if (! $this->has($product['id'])) {
+        if (!$this->has($product['id'])) {
             throw new Exception('There is no item in shopping cart with id: ' . $product['id']);
         }
 
@@ -145,7 +153,6 @@ class Cart implements CartInterface
 
         return $this->update($item);
     }
-
 
     /**
      * Update price of an Item.
@@ -224,7 +231,7 @@ class Cart implements CartInterface
     {
         $this->collection->setItems($this->session->get($this->getCart(), []));
 
-        return $this->collection->findItem($id)? true : false;
+        return $this->collection->findItem($id) ? true : false;
     }
 
     /**
@@ -249,7 +256,7 @@ class Cart implements CartInterface
     {
         $items = $this->getItems();
 
-        return $items->sum(function($item) {
+        return $items->sum(function ($item) {
             return $item->price * $item->quantity;
         });
     }
@@ -264,29 +271,29 @@ class Cart implements CartInterface
     {
         $items = $this->getItems();
 
-        return $items->sum(function($item) {
+        return $items->sum(function ($item) {
             return $item->quantity;
         });
     }
 
     /**
      * Clone a cart to another
-     * 
+     *
      * @param  mix $cart
-     * 
+     *
      * @return void
      */
 
     public function copy($cart)
     {
         if (is_object($cart)) {
-            if (! $cart instanceof \Anam\Phpcart\Cart) {
+            if (!$cart instanceof \Anam\Phpcart\Cart) {
                 throw new InvalidArgumentException("Argument must be an instance of " . get_class($this));
             }
 
             $items = $this->session->get($cart->getCart(), []);
         } else {
-            if (! $this->session->has($cart . self::CARTSUFFIX)) {
+            if (!$this->session->has($cart . self::CARTSUFFIX)) {
                 throw new Exception('Cart does not exist: ' . $cart);
             }
 
