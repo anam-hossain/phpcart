@@ -5,7 +5,7 @@ Simple framework agnostic shopping cart.
 
 - Simple API
 - Support multiple cart instances
-- Framework agnostic, with optional Laravel integration
+- Framework agnostic
 
 ## Requirements
 
@@ -18,32 +18,11 @@ PHPCart is available via Composer
 $ composer require anam/phpcart
 ```
 
-## Integrations
+## Laravel Integrations
 
-#### Laravel 5.5+ integrations
+Use the following dedicated laravel package for PHpCart.
 
-##### Package Discovery
-`Anam\Phpcart` utilize the Laravel's package auto discovery feature. So, you don't need to add manually Service provider and Facade in Laravel application's config/app.php. Laravel will automatically register the service provider and facades for you.
-
-#### Laravel < 5.5 integrations
-
-Although PHPCart is framework agnostic, it does support Laravel out of the box and comes with a Service provider and Facade for easy integration.
-
-After you have installed the PHPCart, open the config/app.php file which is included with Laravel and add the following lines.
-
-In the $providers array add the following service provider.
-
-```php
-'Anam\Phpcart\CartServiceProvider'
-```
-
-Add the facade of this package to the $aliases array.
-
-```php
-'Cart' => 'Anam\Phpcart\Facades\Cart'
-```
-
-You can now use this facade in place of instantiating the Cart yourself in the following examples.
+https://github.com/anam-hossain/lara-phpcart
 
 ## Usage
 
