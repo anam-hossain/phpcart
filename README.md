@@ -20,7 +20,7 @@ $ composer require anam/phpcart
 
 ## Laravel Integrations
 
-Use the following dedicated laravel package for PHpCart.
+Use the following dedicated laravel package for PHPCart.
 
 https://github.com/anam-hossain/lara-phpcart
 
